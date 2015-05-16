@@ -1,5 +1,16 @@
 # code-challenge-afonsof
 
+### Running
+#### Server
+```
+npm start
+```
+
+#### Tests
+```
+npm test
+```
+
 ### Problem Description
 
 #### Background

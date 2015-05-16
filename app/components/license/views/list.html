@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <td><h3>All Licenses</h3></td>
+        <td></td>
+    </tr>
+    <tr ng-repeat="license in licenses">
+        <td>{{license.applicant}}</td>
+        <td>{{license.wellType}}</td>
+        <td>{{license.company}}</td>
+        <td>
+            <a href="#/license/view/{{license._id}}">View</a>
+            <a ng-click="deleteLicense(license)">Delete</a>
+        </td>
+    </tr>
+</table>
+<a href="#/license/create">Create</a>

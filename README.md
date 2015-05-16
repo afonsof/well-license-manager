@@ -40,7 +40,7 @@ A typical well license has the following structure:
     "latitude": 56.200876,
     "longitude": -112.714889,
     "dateModified": "2013-05-03T00:12:50.185Z",
-    "dateIssued": "2013-05-03T00:12:50.183Z"
+    "dateIssued": "2013-05-03T00:12:50.183Z",
     "status": "active"
 }
 ```

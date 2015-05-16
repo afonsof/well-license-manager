@@ -11,9 +11,11 @@ describe('Controllers', function () {
     }));
 
     describe('LicenseEditCtrl', function () {
-        var $scopeMock, LicenseMock, $routeParamsMock, popupServiceMock, $locationMock;
+        var $scopeMock, LicenseMock, $routeParamsMock, messageServiceMock, $locationMock, selectBoxServiceMock;
         var getPromise = 'get promise';
         var expectedId = 123;
+        var wellTypesExpected = 'wellTypesExpected';
+        var statusesExpected = 'statusExpected';
 
         beforeEach(function () {
             $scopeMock = {};
@@ -23,8 +25,12 @@ describe('Controllers', function () {
                     return getPromise;
                 }
             };
+            selectBoxServiceMock = {
+                wellTypes: wellTypesExpected,
+                statuses: statusesExpected
+            };
             $routeParamsMock = {id: expectedId};
-            popupServiceMock = {};
+            messageServiceMock = {};
             $locationMock = {};
 
             $controller('LicenseEditCtrl', {
@@ -32,7 +38,8 @@ describe('Controllers', function () {
                 License: LicenseMock,
                 $routeParams: $routeParamsMock,
                 $location: $locationMock,
-                popupService: popupServiceMock
+                messageService: messageServiceMock,
+                selectBoxService: selectBoxServiceMock
             });
         });
 
@@ -40,12 +47,17 @@ describe('Controllers', function () {
             expect($scopeMock.license).toEqual(getPromise);
         });
 
+        it('should fill select boxes', function () {
+            expect($scopeMock.wellTypes).toEqual(wellTypesExpected);
+            expect($scopeMock.statuses).toEqual(statusesExpected);
+        });
+
         it('should edit, redirect and show message', function () {
             var license = {_id: 123};
             var deleteWasCalled = false;
             var pathWasCalled = false;
             var messageCalled = '';
-            popupServiceMock.message = function (msg) {
+            messageServiceMock.message = function (msg) {
                 messageCalled = msg;
             };
             LicenseMock.update = function (obj, license, callback) {

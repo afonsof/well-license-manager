@@ -11,7 +11,7 @@ describe('Controllers', function () {
     }));
 
     describe('LicenseListCtrl', function () {
-        var $scopeMock, LicenseMock, popupServiceMock, locationMock;
+        var $scopeMock, LicenseMock, messageServiceMock, locationMock;
         var queryPromise = 'query promise';
 
         beforeEach(function () {
@@ -22,12 +22,12 @@ describe('Controllers', function () {
                 }
             };
             locationMock = {};
-            popupServiceMock = {};
+            messageServiceMock = {};
             $controller('LicenseListCtrl', {
                 $scope: $scopeMock,
                 License: LicenseMock,
                 $location: locationMock,
-                popupService: popupServiceMock
+                messageService: messageServiceMock
             });
         });
 
@@ -39,7 +39,7 @@ describe('Controllers', function () {
             var license = {_id: 123};
             var deleteWasCalled = false;
             var pathWasCalled = false;
-            popupServiceMock.confirm = function () {
+            messageServiceMock.confirm = function () {
                 return true;
             };
             LicenseMock.delete = function (obj, callback) {
@@ -59,7 +59,7 @@ describe('Controllers', function () {
         it('should not delete and not redirect if dont confirm', function () {
             var deleteWasCalled = false;
             var pathWasCalled = false;
-            popupServiceMock.confirm = function () {
+            messageServiceMock.confirm = function () {
                 return false;
             };
             LicenseMock.delete = function (obj, callback) {

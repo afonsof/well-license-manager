@@ -2,13 +2,12 @@
 
 angular.module('licenseManager.license.controllers', [])
 
-    .controller('LicenseListCtrl', function ($scope, $location, popupService, License) {
-
+    .controller('LicenseListCtrl', function ($scope, $location, messageService, License) {
         $scope.licenses = License.query();
 
         $scope.deleteLicense = function (license) {
-            if (popupService.confirm('Do you really want to delete this license?')) {
-                License.delete({id: license._id} , function () {
+            if (messageService.confirm('Do you really want to delete this license?')) {
+                License.delete({id: license._id}, function () {
                     $location.path('/license');
                 });
             }
@@ -19,9 +18,10 @@ angular.module('licenseManager.license.controllers', [])
         $scope.license = License.get({id: $routeParams.id});
     })
 
-    .controller('LicenseCreateCtrl', function ($scope, $location, License) {
-
+    .controller('LicenseCreateCtrl', function ($scope, $location, License, selectBoxService) {
         $scope.license = new License();
+        $scope.wellTypes = selectBoxService.wellTypes;
+        $scope.statuses = selectBoxService.statuses;
 
         $scope.addLicense = function () {
             $scope.license.$save(function () {
@@ -30,9 +30,10 @@ angular.module('licenseManager.license.controllers', [])
         }
     })
 
-    .controller('LicenseEditCtrl', function ($scope, $location, $routeParams, popupService, License) {
-
+    .controller('LicenseEditCtrl', function ($scope, $location, $routeParams, messageService, License, selectBoxService) {
         $scope.license = License.get({id: $routeParams.id});
+        $scope.wellTypes = selectBoxService.wellTypes;
+        $scope.statuses = selectBoxService.statuses;
 
         $scope.updateLicense = function () {
             var id = $scope.license['_id'];
@@ -42,7 +43,7 @@ angular.module('licenseManager.license.controllers', [])
 
             License.update({id: id}, $scope.license, function () {
                 $location.path('/license');
-                popupService.message('OK!');
+                messageService.message('OK!');
 
             });
         };

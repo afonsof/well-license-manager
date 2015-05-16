@@ -1,5 +1,5 @@
-angular.module('licenseManager.message.service', [])
-    .service('popupService', function ($window) {
+angular.module('licenseManager.services', [])
+    .service('messageService', function ($window) {
         this.confirm = function (message) {
             return $window.confirm(message);
         };

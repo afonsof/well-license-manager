@@ -9,7 +9,7 @@
     <label>Well Type</label>
 
     <div>
-        <input type="text" ng-model="license.wellType"/>
+        <select ng-model="license.wellType" ng-options="item for item in wellTypes"></select>
     </div>
 </div>
 <div>
@@ -36,7 +36,7 @@
 <div>
     <label>Status
         <div>
-            <input type="text" ng-model="license.status"/>
+            <select ng-model="license.status" ng-options="item for item in statuses"></select>
         </div>
     </label>
 </div>
@@ -44,5 +44,6 @@
 <div class="form-group">
     <div>
         <input type="submit" value="Save"/>
+        <a href="#/license">Back to List</a>
     </div>
 </div>

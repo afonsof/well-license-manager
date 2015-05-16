@@ -11,14 +11,20 @@ describe('Controllers', function () {
     }));
 
     describe('LicenseCreateCtrl', function () {
-        var $scope, LicenseMock, $routeParamsMock, $locationMock;
+        var $scope, LicenseMock, $routeParamsMock, $locationMock, selectBoxServiceMock;
         var idValue = 123;
         var expectedId = 123;
+        var wellTypesExpected = 'wellTypesExpected';
+        var statusesExpected = 'statusExpected';
 
         beforeEach(function () {
             $scope = {};
-            LicenseMock = function(){
+            LicenseMock = function () {
                 this.id = idValue;
+            };
+            selectBoxServiceMock = {
+                wellTypes: wellTypesExpected,
+                statuses: statusesExpected
             };
             $routeParamsMock = {id: expectedId};
             $locationMock = {};
@@ -26,7 +32,8 @@ describe('Controllers', function () {
             $controller('LicenseCreateCtrl', {
                 $scope: $scope,
                 License: LicenseMock,
-                $location: $locationMock
+                $location: $locationMock,
+                selectBoxService: selectBoxServiceMock
             });
         });
 
@@ -34,15 +41,20 @@ describe('Controllers', function () {
             expect($scope.license.id).toEqual(idValue);
         });
 
+        it('should fill select boxes', function () {
+            expect($scope.wellTypes).toEqual(wellTypesExpected);
+            expect($scope.statuses).toEqual(statusesExpected);
+        });
+
         it('should create and redirect', function () {
             var saveWasCalled = false;
             var pathWasCalled = false;
 
-            $scope.license.$save = function(callback){
+            $scope.license.$save = function (callback) {
                 saveWasCalled = true;
                 callback();
             };
-            $locationMock.path = function(str){
+            $locationMock.path = function (str) {
                 pathWasCalled = true;
                 expect(str).toEqual('/license');
             };

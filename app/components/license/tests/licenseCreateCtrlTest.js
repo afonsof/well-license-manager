@@ -56,7 +56,7 @@ describe('Controllers', function () {
             };
             $locationMock.path = function (str) {
                 pathWasCalled = true;
-                expect(str).toEqual('/license');
+                expect(str).toEqual('/');
             };
             $scope.addLicense();
             expect(saveWasCalled).toBe(true);

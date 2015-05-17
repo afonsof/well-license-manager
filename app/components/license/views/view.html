@@ -1,41 +1,53 @@
-<table>
-    <tr>
-        <td><h3>Details for License</h3></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Applicant</td>
-        <td>{{license.applicant}}</td>
-    </tr>
-    <tr>
-        <td>Well Type</td>
-        <td>{{license.wellType}}</td>
-    </tr>
-    <tr>
-        <td>Company</td>
-        <td>{{license.company}}</td>
-    </tr>
-    <tr>
-        <td>Latitude</td>
-        <td>{{license.latitude}}</td>
-    </tr>
-    <tr>
-        <td>Longitude</td>
-        <td>{{license.longitude}}</td>
-    </tr>
-    <tr>
-        <td>Date Issued</td>
-        <td>{{license.dateIssued}}</td>
-    </tr>
-    <tr>
-        <td>Date Modified</td>
-        <td>{{license.dateModified}}</td>
-    </tr>
-    <tr>
-        <td>Date Status</td>
-        <td>{{license.status}}</td>
-    </tr>
-</table>
-<div>
-    <a href="#/license/edit/{{license._id}}">Edit</a>
+<div class="wrapper license-view">
+    <nav class="blue-grey darken-3" role="navigation">
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li><a href="#/"><i class="mdi-navigation-arrow-back"></i></a></li>
+                <li class="nav-title">{{license.company}}</li>
+            </ul>
+
+            <ul class="right">
+                <li><a href="" ng-click="deleteLicense()"><i class="mdi-action-delete"></i></a></li>
+                <li><a ng-href="#/edit/{{license._id}}"><i class="mdi-editor-mode-edit"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col l2 m3 s12 icon">
+            <i ng-class="'lmi lmi-'+license.status"></i>
+
+            <div class="status">{{license.status}}</div>
+
+            <div>Date Issued</div>
+            <div>{{license.dateIssued | date : format : short}}</div>
+            <div>Date Modified</div>
+            <div>{{license.dateModified | date : format : short}}</div>
+
+        </div>
+
+        <div class="col l5 m9 s12">
+            <table>
+                <tr>
+                    <th>Applicant</th>
+                    <td>{{license.applicant}}</td>
+                </tr>
+                <tr>
+                    <th>Well Type</th>
+                    <td>{{license.wellType}}</td>
+                </tr>
+                <tr>
+                    <th>Company</th>
+                    <td>{{license.company}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col l5 m12 s12">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+    </div>
 </div>
+

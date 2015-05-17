@@ -1,4 +1,4 @@
-angular.module('licenseManager.services', [])
+angular.module('licenseManager.shared')
     .service('messageService', function ($window) {
         this.confirm = function (message) {
             return $window.confirm(message);

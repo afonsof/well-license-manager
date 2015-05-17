@@ -1,3 +1,19 @@
-<form class="form-horizontal" role="form" ng-submit="addLicense()">
-    <div ng-include="'components/license/views/_form.html'"></div>
-</form>
+<div class="wrapper license-create">
+    <nav class="blue-grey darken-3" role="navigation">
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li><a ng-href="#/view/{{license._id}}"><i class="mdi-navigation-arrow-back"></i></a></li>
+                <li class="nav-title">Create License</li>
+            </ul>
+
+            <ul class="right">
+                <li><a ng-click="addLicense()"><i class="mdi-action-done"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <form class="form-horizontal" role="form">
+            <div ng-include="'components/license/views/_form.html'"></div>
+        </form>
+    </div>
+</div>

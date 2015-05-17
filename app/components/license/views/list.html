@@ -1,17 +1,62 @@
-<table>
-    <tr>
-        <td><h3>All Licenses</h3></td>
-        <td></td>
-    </tr>
-    <tr ng-repeat="license in licenses">
-        <td>{{license.applicant}}</td>
-        <td>{{license.wellType}}</td>
-        <td>{{license.company}}</td>
-        <td>
-            <a href="#/license/view/{{license._id}}">View</a>
-            <a href="#/license/edit/{{license._id}}">Edit</a>
-            <a ng-click="deleteLicense(license)">Delete</a>
-        </td>
-    </tr>
-</table>
-<a href="#/license/create">Create</a>
+<div class="wrapper cant-scroll license-list">
+    <nav class="blue-grey darken-3" role="navigation">
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li ng-show="searching"><a ng-click="cancelSearch()"><i class="mdi-navigation-arrow-back"></i></a></li>
+                <li><input class="search-input" placeholder="Type applicant or company name" ng-show="searching"
+                           type="text" ng-model="searchString"/>
+                </li>
+                <li class="nav-title" ng-hide="searching">
+                    <img src="assets/img/logo1.svg "/>
+                    Well Licenses
+                </li>
+            </ul>
+
+            <ul class="right">
+                <li ng-show="searching"><a href="" ng-click="clearSearch()"><i class="mdi-navigation-close"></i></a>
+                </li>
+                <li ng-hide="searching"><a href="" ng-click="search()"><i class="mdi-action-search"></i></a></li>
+                <li class="hide-on-large-only" ng-show="(!searching && showMap!='list')">
+                    <a href="" ng-click="showMap='list'"><i
+                            class="mdi-action-view-list"></i></a></li>
+                <li class="hide-on-large-only" ng-show="(!searching && showMap=='list')">
+                    <a href="" ng-click="showMap='map'"><i
+                            class="mdi-maps-map"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div ng-class="'col m12 l4 '+ (showMap==''?'show-in-lg':'')" ng-show="showMap!='map'">
+            <div class="collection">
+                <a href="#/view/{{license._id}}" class="collection-item avatar"
+                   ng-repeat="license in filtered">
+                    <img ng-src="assets/img/{{license.status}}.svg" alt="" class="circle">
+                    <span class="title truncate">{{license.company}}</span>
+
+                    <p>{{license.applicant}}<br>
+                        {{license.wellType}}
+                    </p>
+                </a>
+            </div>
+        </div>
+
+        <div class="col offset-l4 offset-m0 m12 l8" ng-show="showMap!='list'">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options"
+                                bounds="map.bounds">
+                <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" click="viewLicense(id)"
+                                 fit="true">
+                </ui-gmap-markers>
+            </ui-gmap-google-map>
+        </div>
+
+
+    </div>
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+        <a href="#/create" class="btn-floating btn-large blue-grey">
+            <i class="large mdi-content-add"></i>
+        </a>
+    </div>
+
+</div>

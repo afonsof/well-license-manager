@@ -4,19 +4,19 @@ angular.module('licenseManager.license.routes', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-            .when('/license', {
+            .when('/', {
                 templateUrl: '/components/license/views/list.html',
                 controller: 'LicenseListCtrl'
             })
-            .when('/license/view/:id', {
+            .when('/view/:id', {
                 templateUrl: '/components/license/views/view.html',
                 controller: 'LicenseViewCtrl'
             })
-            .when('/license/create', {
+            .when('/create', {
                 templateUrl: '/components/license/views/create.html',
                 controller: 'LicenseCreateCtrl'
             })
-            .when('/license/edit/:id', {
+            .when('/edit/:id', {
                 templateUrl: '/components/license/views/edit.html',
                 controller: 'LicenseEditCtrl'
             });

@@ -70,7 +70,7 @@ describe('Controllers', function () {
             };
             $locationMock.path = function (str) {
                 pathWasCalled = true;
-                expect(str).toEqual('/license');
+                expect(str).toEqual('/');
             };
             $scopeMock.updateLicense(license);
             expect(deleteWasCalled).toBe(true);

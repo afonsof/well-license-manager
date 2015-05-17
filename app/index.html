@@ -1,37 +1,54 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="licenseManager" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="licenseManager" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="licenseManager" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="licenseManager" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>
+<html lang="en" ng-app="licenseManager" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="licenseManager" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="licenseManager" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="licenseManager" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/components/html5-boilerplate/css/normalize.css">
-  <link rel="stylesheet" href="assets/components/html5-boilerplate/css/main.css">
-  <script src="assets/components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Well License Manager</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+    <link rel="stylesheet" href="assets/components/html5-boilerplate/css/normalize.css">
+    <link rel="stylesheet" href="assets/components/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="assets/components/materialize/dist/css/materialize.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
 
-  <div ng-view></div>
+<div ng-view></div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="assets/components/angular/angular.js"></script>
-  <script src="assets/components/angular-route/angular-route.js"></script>
-  <script src="assets/components/angular-resource/angular-resource.js"></script>
-  <script src="app.js"></script>
-  <script src="components/license/licenseControllers.js"></script>
-  <script src="components/license/licenseRoutes.js"></script>
-  <script src="components/license/licenseServices.js"></script>
-  <script src="shared/messageService.js"></script>
-  <script src="shared/selectBoxService.js"></script>
+<script src="assets/components/jquery/dist/jquery.js"></script>
+
+<script src="assets/components/materialize/dist/js/materialize.js"></script>
+
+<script src="assets/components/angular/angular.js"></script>
+<script src="assets/components/angular-route/angular-route.js"></script>
+<script src="assets/components/angular-resource/angular-resource.js"></script>
+
+<script src="assets/components/angular-materialize/src/angular-materialize.js"></script>
+<script src="assets/components/lodash/dist/lodash.js"></script>
+<script src="assets/components/angular-google-maps/dist/angular-google-maps.js"></script>
+
+<script src="app.js"></script>
+<script src="components/license/licenseControllers.js"></script>
+<script src="components/license/licenseRoutes.js"></script>
+<script src="components/license/licenseServices.js"></script>
+<script src="shared/selectBoxService.js"></script>
+<script src="shared/messageService.js"></script>
+<script src="shared/mapDataService.js"></script>
 
 </body>
 </html>

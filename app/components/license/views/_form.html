@@ -1,49 +1,28 @@
-<div>
-    <label>Applicant
-        <div>
-            <input type="text" ng-model="license.applicant"/>
-        </div>
-    </label>
+<div class="row">
+    <div input-field>
+        <label>Company</label>
+        <input type="text" ng-model="license.company"/>
+    </div>
 </div>
-<div>
+<div class="row">
+    <div input-field>
+        <label>Applicant</label>
+        <input type="text" ng-model="license.applicant"/>
+    </div>
+</div>
+<div class="row">
     <label>Well Type</label>
-
-    <div>
-        <select ng-model="license.wellType" ng-options="item for item in wellTypes"></select>
-    </div>
+    <select ng-model="license.wellType" ng-options="item for item in wellTypes" material-select></select>
 </div>
-<div>
-    <label>Company
-        <div>
-            <input type="text" ng-model="license.company"/>
-        </div>
-    </label>
-</div>
-<div>
-    <label>Latitude
-        <div>
-            <input type="text" ng-model="license.latitude"/>
-        </div>
-    </label>
-</div>
-<div>
-    <label>Longitude
-        <div>
-            <input type="text" ng-model="license.longitude"/>
-        </div>
-    </label>
-</div>
-<div>
-    <label>Status
-        <div>
-            <select ng-model="license.status" ng-options="item for item in statuses"></select>
-        </div>
-    </label>
+<div class="row">
+    <label>Status</label>
+    <select ng-model="license.status"
+            ng-options="item for item in statuses" material-select></select>
 </div>
 
-<div class="form-group">
-    <div>
-        <input type="submit" value="Save"/>
-        <a href="#/license">Back to List</a>
-    </div>
-</div>
+<h5>Choose the weel location</h5>
+
+<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+    <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+    </ui-gmap-marker>
+</ui-gmap-google-map>

@@ -164,32 +164,6 @@ module.exports = function (grunt) {
             }
         },
 
-        imagemin: {
-            dist: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= appConfig.app %>/assets/img',
-                        src: '{,*/}*.{png,jpg,jpeg,gif}',
-                        dest: '<%= appConfig.dist %>/assets/img'
-                    }
-                ]
-            }
-        },
-
-        svgmin: {
-            dist: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= appConfig.app %>/assets/img',
-                        src: '{,*/}*.svg',
-                        dest: '<%= appConfig.dist %>/assets/img'
-                    }
-                ]
-            }
-        },
-
         htmlmin: {
             dist: {
                 options: {
@@ -229,17 +203,17 @@ module.exports = function (grunt) {
                         cwd: '<%= appConfig.app %>/assets/components/materialize',
                         src: 'font/**/*.woff*',
                         dest: '<%= appConfig.dist %>/assets'
+                    },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: '<%= appConfig.app %>/assets/img',
+                        src: '*',
+                        dest: '<%= appConfig.dist %>/assets/img'
                     }
                 ]
             }
         },
-
-        concurrent: {
-            shrinkImages: [
-                'imagemin',
-                'svgmin'
-            ]
-        }
     });
 
     grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
@@ -259,7 +233,6 @@ module.exports = function (grunt) {
         'clean:dist',
         'less',
         'useminPrepare',
-        'concurrent:shrinkImages',
         'concat',
         'autoprefixer',
         'copy:dist',

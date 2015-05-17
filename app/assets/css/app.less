@@ -20,6 +20,7 @@
 @white: #fff;
 @red: #f44336;
 @green: #2e7d32;
+@blue: #3f6d82;
 
 @blue-grey-l5: #eceff1;
 @blue-grey-l4: #cfd8dc;
@@ -301,11 +302,38 @@ nav {
   top: @nav-height-lg;
   background-color: @green;
 
-  @media(max-width: @sm-devices-max-width){
+  @media (max-width: @sm-devices-max-width) {
     top: @nav-height-sm;
   }
 }
 
 #loading-bar .peg {
   box-shadow: @green 1px 0 6px 1px;
+}
+
+.welcome {
+  color: @white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: @blue;
+  z-index: 1000000;
+  display: block;
+  text-align: center;
+
+  h1{
+    text-transform: uppercase;
+  }
+
+  img {
+    margin: 0 auto;
+    display: block;
+    height: 45vh;
+  }
+
+  button{
+    margin-top: @md-space;
+  }
 }

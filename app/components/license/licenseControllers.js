@@ -3,7 +3,8 @@
 angular.module('licenseManager.license.controllers', [])
 
     .controller('LicenseListCtrl', ['$scope', '$filter', '$location', 'License', 'mapDataService',
-        function ($scope, $filter, $location, License, mapDataService) {
+        'localStorageService',
+        function ($scope, $filter, $location, License, mapDataService, localStorageService) {
             $scope.licenses = License.query(function () {
                 redrawMarkers();
             });
@@ -24,6 +25,7 @@ angular.module('licenseManager.license.controllers', [])
             };
 
             $scope.showMap = '';
+            $scope.welcomeViewed = localStorageService.getItem('welcomeViewed');
 
             $scope.search = function () {
                 $scope.clearSearch();
@@ -37,6 +39,11 @@ angular.module('licenseManager.license.controllers', [])
 
             $scope.clearSearch = function () {
                 $scope.searchString = '';
+            };
+
+            $scope.dimissWelcome = function(){
+              $scope.welcomeViewed = true;
+                localStorageService.setItem('welcomeViewed');
             };
         }])
 

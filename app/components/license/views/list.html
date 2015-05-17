@@ -41,7 +41,7 @@
         </div>
     </nav>
 
-    <div class="row" ng-show="licenses.length">
+    <div class="row">
         <div ng-class="'col m12 l4 '+ (showMap==''?'show-in-lg':'')" ng-show="showMap!='map'">
             <div class="collection">
                 <a href="#/view/{{license._id}}" class="collection-item avatar"
@@ -72,18 +72,20 @@
         </a>
     </div>
 
-    <div class="card" style="position:absolute; top: 10%; left: 10%;  right: 10%; bottom: 10%">
-        <div class="card-image">
-            <img src="images/sample-1.jpg">
-            <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
-                require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-            <a href="#">This is a link</a>
-            <a href='#'>This is a link</a>
+    <div class="welcome" ng-show="!welcomeViewed">
+        <div class="container">
+            <img src="assets/img/welcome.jpg">
+
+            <h5>PetroFeed</h5>
+
+            <p>
+                Welcome to Well License Manager. Here you will be able to manage the issuing of "well licenses" to
+                companies
+                or agencies who are interested in drilling for oil in the Alberta province. You can search, register and
+                edit licenses here.
+                Enjoy!
+            </p>
+            <button class="btn" ng-click="dimissWelcome()">OK, I undersand.</button>
         </div>
     </div>
 </div>

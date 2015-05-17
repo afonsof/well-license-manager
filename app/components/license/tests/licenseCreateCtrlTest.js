@@ -11,14 +11,15 @@ describe('Controllers', function () {
     }));
 
     describe('LicenseCreateCtrl', function () {
-        var $scope, LicenseMock, $routeParamsMock, $locationMock, selectBoxServiceMock;
+        var $scopeMock, LicenseMock, $routeParamsMock, $locationMock,
+            selectBoxServiceMock, mapDataServiceMock, messageServiceMock;
         var idValue = 123;
         var expectedId = 123;
         var wellTypesExpected = 'wellTypesExpected';
         var statusesExpected = 'statusExpected';
 
         beforeEach(function () {
-            $scope = {};
+            $scopeMock = {};
             LicenseMock = function () {
                 this.id = idValue;
             };
@@ -26,31 +27,46 @@ describe('Controllers', function () {
                 wellTypes: wellTypesExpected,
                 statuses: statusesExpected
             };
+            mapDataServiceMock = {};
+            messageServiceMock = {};
             $routeParamsMock = {id: expectedId};
             $locationMock = {};
 
             $controller('LicenseCreateCtrl', {
-                $scope: $scope,
+                $scope: $scopeMock,
                 License: LicenseMock,
                 $location: $locationMock,
-                selectBoxService: selectBoxServiceMock
+                selectBoxService: selectBoxServiceMock,
+                mapDataService: {
+                    fromLicense: function () {
+                    }
+                },
+                errorHandlerService: {},
+                messageService: messageServiceMock
             });
         });
 
         it('should use resource to set $scope.license', function () {
-            expect($scope.license.id).toEqual(idValue);
+            expect($scopeMock.license.id).toEqual(idValue);
         });
 
         it('should fill select boxes', function () {
-            expect($scope.wellTypes).toEqual(wellTypesExpected);
-            expect($scope.statuses).toEqual(statusesExpected);
+            expect($scopeMock.wellTypes).toEqual(wellTypesExpected);
+            expect($scopeMock.statuses).toEqual(statusesExpected);
         });
 
         it('should create and redirect', function () {
+            //setup
             var saveWasCalled = false;
             var pathWasCalled = false;
+            var messageWasCalled = false;
 
-            $scope.license.$save = function (callback) {
+            $scopeMock.licenseForm = {$valid: true};
+            messageServiceMock.message = function(msg){
+                messageWasCalled = true;
+                expect(msg).toEqual('License created.');
+            };
+            $scopeMock.license.$save = function (callback) {
                 saveWasCalled = true;
                 callback();
             };
@@ -58,9 +74,36 @@ describe('Controllers', function () {
                 pathWasCalled = true;
                 expect(str).toEqual('/');
             };
-            $scope.addLicense();
+            //excercise
+            $scopeMock.addLicense();
+
+            //verify
             expect(saveWasCalled).toBe(true);
             expect(pathWasCalled).toBe(true);
+            expect(messageWasCalled).toBe(true);
+        });
+
+        it('should not create if form is invalid', function () {
+            //setup
+            var saveWasCalled = false;
+            var errorMessageWasCalled = false;
+            $scopeMock.licenseForm = {$valid: false};
+            $scopeMock.license.$save = function (callback) {
+                saveWasCalled = true;
+                callback();
+            };
+            messageServiceMock.error = function(msg){
+                errorMessageWasCalled = true;
+                expect(msg).toEqual('There are errors in the form.');
+            };
+
+            //exercise
+            $scopeMock.addLicense();
+
+            //verify
+            expect(saveWasCalled).toBe(false);
+            expect(errorMessageWasCalled).toBe(true);
+
         });
     });
 });

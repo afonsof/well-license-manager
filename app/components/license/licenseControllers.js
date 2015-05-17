@@ -77,7 +77,6 @@ angular.module('licenseManager.license.controllers', [])
             $scope.license.status = 'active';
             mapDataService.fromLicense($scope, true);
 
-
             $scope.addLicense = function () {
                 if (!$scope.licenseForm.$valid) {
                     messageService.error('There are errors in the form.');

@@ -11,7 +11,8 @@ describe('Controllers', function () {
     }));
 
     describe('LicenseEditCtrl', function () {
-        var $scopeMock, LicenseMock, $routeParamsMock, messageServiceMock, $locationMock, selectBoxServiceMock;
+        var $scopeMock, LicenseMock, $routeParamsMock, messageServiceMock, $locationMock,
+            selectBoxServiceMock, mapDataServiceMock, errorHandlerServiceMock;
         var getPromise = 'get promise';
         var expectedId = 123;
         var wellTypesExpected = 'wellTypesExpected';
@@ -32,6 +33,8 @@ describe('Controllers', function () {
             $routeParamsMock = {id: expectedId};
             messageServiceMock = {};
             $locationMock = {};
+            mapDataServiceMock = {};
+            errorHandlerServiceMock = {};
 
             $controller('LicenseEditCtrl', {
                 $scope: $scopeMock,
@@ -39,7 +42,9 @@ describe('Controllers', function () {
                 $routeParams: $routeParamsMock,
                 $location: $locationMock,
                 messageService: messageServiceMock,
-                selectBoxService: selectBoxServiceMock
+                selectBoxService: selectBoxServiceMock,
+                mapDataService: mapDataServiceMock,
+                errorHandlerService: errorHandlerServiceMock
             });
         });
 
@@ -53,15 +58,16 @@ describe('Controllers', function () {
         });
 
         it('should edit, redirect and show message', function () {
+            //setup
             var license = {_id: 123};
-            var deleteWasCalled = false;
+            var updateWasCalled = false;
             var pathWasCalled = false;
             var messageCalled = '';
             messageServiceMock.message = function (msg) {
                 messageCalled = msg;
             };
             LicenseMock.update = function (obj, license, callback) {
-                deleteWasCalled = true;
+                updateWasCalled = true;
                 expect(obj.id).toEqual(license._id);
                 expect(license._id).toEqual(undefined);
                 expect(license.dateIssued).toEqual(undefined);
@@ -72,10 +78,40 @@ describe('Controllers', function () {
                 pathWasCalled = true;
                 expect(str).toEqual('/');
             };
+            $scopeMock.licenseForm = { $valid: true };
+            //exercise
             $scopeMock.updateLicense(license);
-            expect(deleteWasCalled).toBe(true);
+
+            //verify
+            expect(updateWasCalled).toBe(true);
             expect(pathWasCalled).toBe(true);
-            expect(messageCalled).toBe('OK!');
+            expect(messageCalled).toBe('License updated.');
+        });
+
+        it('should not edit if form is invalid', function () {
+            //setup
+            var license = {_id: 123};
+            var updateWasCalled = false;
+            var errorWasCalled = false;
+            messageServiceMock.error = function (msg) {
+                expect(msg).toEqual('There are errors in the form.');
+                errorWasCalled = true;
+            };
+            LicenseMock.update = function (obj, license, callback) {
+                updateWasCalled = true;
+                expect(obj.id).toEqual(license._id);
+                expect(license._id).toEqual(undefined);
+                expect(license.dateIssued).toEqual(undefined);
+                expect(license.dateModified).toEqual(undefined);
+                callback();
+            };
+            $scopeMock.licenseForm = { $valid: false };
+            //exercise
+            $scopeMock.updateLicense(license);
+
+            //verify
+            expect(updateWasCalled).toBe(false);
+            expect(errorWasCalled).toBe(true);
         });
     });
 });

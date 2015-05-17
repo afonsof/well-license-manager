@@ -1,5 +1,5 @@
 'use strict';
-angular.module('licenseManager.shared', [])
+angular.module('licenseManager.shared')
     .service('selectBoxService', function () {
         this.wellTypes = [
             'New Field Wildcat',

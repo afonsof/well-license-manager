@@ -1,27 +1,42 @@
-<div class="wrapper cant-scroll license-list">
+<div class="wrapper license-list">
     <nav class="blue-grey darken-3" role="navigation">
         <div class="nav-wrapper">
             <ul class="left">
-                <li ng-show="searching"><a ng-click="cancelSearch()"><i class="mdi-navigation-arrow-back"></i></a></li>
-                <li><input class="search-input" placeholder="Type applicant or company name" ng-show="searching"
-                           type="text" ng-model="searchString"/>
+                <li ng-show="searching">
+                    <a title="Cancel Search" ng-click="cancelSearch()">
+                        <i class="mdi-navigation-arrow-back"></i>
+                    </a>
+                </li>
+                <li>
+                    <input class="search-input" placeholder="Type applicant or company name"
+                           ng-show="searching" type="text" ng-model="searchString"/>
                 </li>
                 <li class="nav-title" ng-hide="searching">
-                    <img src="assets/img/logo1.svg "/>
+                    <img src="assets/img/logo1.svg"/>
+
                     <div>Well Licenses</div>
                 </li>
             </ul>
 
             <ul class="right">
-                <li ng-show="searching"><a href="" ng-click="clearSearch()"><i class="mdi-navigation-close"></i></a>
+                <li ng-show="searching">
+                    <button title="Clear Search" ng-click="clearSearch()"><i class="mdi-navigation-close"></i></button>
                 </li>
-                <li ng-hide="searching"><a href="" ng-click="search()"><i class="mdi-action-search"></i></a></li>
+                <li ng-hide="searching">
+                    <button title="Search" ng-click="search()">
+                        <i class="mdi-action-search"></i>
+                    </button>
+                </li>
                 <li class="hide-on-large-only" ng-show="(!searching && showMap!='list')">
-                    <a href="" ng-click="showMap='list'"><i
-                            class="mdi-action-view-list"></i></a></li>
+                    <button title="Show List" ng-click="showMap='list'">
+                        <i class="mdi-action-view-list"></i>
+                    </button>
+                </li>
                 <li class="hide-on-large-only" ng-show="(!searching && showMap=='list')">
-                    <a href="" ng-click="showMap='map'"><i
-                            class="mdi-maps-map"></i></a></li>
+                    <button title="Show Map" ng-click="showMap='map'">
+                        <i class="mdi-maps-map"></i>
+                    </button>
+                </li>
             </ul>
         </div>
     </nav>
@@ -35,7 +50,7 @@
                     <span class="title truncate">{{license.company}}</span>
 
                     <p>{{license.applicant}}<br>
-                        {{license.wellType}}
+                        <span class="label">{{license.wellType}}</span>
                     </p>
                 </a>
             </div>
@@ -49,8 +64,6 @@
                 </ui-gmap-markers>
             </ui-gmap-google-map>
         </div>
-
-
     </div>
 
     <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">

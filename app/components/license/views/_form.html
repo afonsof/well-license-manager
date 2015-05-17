@@ -1,28 +1,44 @@
-<div class="row">
-    <div input-field>
-        <label>Company</label>
-        <input type="text" ng-model="license.company"/>
-    </div>
-</div>
-<div class="row">
-    <div input-field>
-        <label>Applicant</label>
-        <input type="text" ng-model="license.applicant"/>
-    </div>
-</div>
-<div class="row">
-    <label>Well Type</label>
-    <select ng-model="license.wellType" ng-options="item for item in wellTypes" material-select></select>
-</div>
-<div class="row">
-    <label>Status</label>
-    <select ng-model="license.status"
-            ng-options="item for item in statuses" material-select></select>
-</div>
 
-<h5>Choose the weel location</h5>
+    <div class="row">
+        <div ng-class="{ 'has-error' : licenseForm.company.$invalid && !licenseForm.company.$pristine }">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" ng-model="license.company" required/>
 
-<ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-    <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-    </ui-gmap-marker>
-</ui-gmap-google-map>
+            <p ng-show="licenseForm.company.$invalid && !licenseForm.company.$pristine" class="help-block">
+                The Company name is required.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-class="{ 'has-error' : licenseForm.applicant.$invalid && !licenseForm.applicant.$pristine }">
+            <label for="applicant">Applicant</label>
+            <input type="text" id="applicant" name="applicant" ng-model="license.applicant" required/>
+
+            <p ng-show="licenseForm.applicant.$invalid && !licenseForm.applicant.$pristine" class="help-block">
+                The Applicant name is required.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <label>Well Type</label>
+        <select class="browser-default" ng-model="license.wellType"
+                ng-options="item for item in wellTypes" required>
+        </select>
+    </div>
+    <div class="row">
+        <label>Status</label>
+        <select class="browser-default" ng-model="license.status"
+                ng-options="item for item in statuses" required>
+        </select>
+    </div>
+
+    <div class="row">
+
+        <h5>Choose the weel location</h5>
+
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+
+    </div>

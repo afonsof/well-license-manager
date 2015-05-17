@@ -2,7 +2,7 @@
 
 angular.module('licenseManager.license.controllers', [])
 
-    .controller('LicenseListCtrl', function ($scope, $filter, $location, messageService, License, mapDataService) {
+    .controller('LicenseListCtrl', function ($scope, $filter, $location, License, mapDataService) {
         $scope.licenses = License.query(function () {
             redrawMarkers();
         });
@@ -39,7 +39,8 @@ angular.module('licenseManager.license.controllers', [])
         };
     })
 
-    .controller('LicenseViewCtrl', function ($scope, $routeParams, $location, License, messageService, mapDataService) {
+    .controller('LicenseViewCtrl', function ($scope, $routeParams, $location, License, messageService,
+                                             mapDataService, errorHandlerService) {
         $scope.license = License.get({id: $routeParams.id}, function () {
             mapDataService.fromLicense($scope);
         });
@@ -47,13 +48,15 @@ angular.module('licenseManager.license.controllers', [])
         $scope.deleteLicense = function () {
             if (messageService.confirm('Do you really want to delete this license?')) {
                 License.delete({id: $scope.license._id}, function () {
+                    messageService.message('License deleted.');
                     $location.path('/');
-                });
+                }, errorHandlerService.handleServerResponse);
             }
         };
     })
 
-    .controller('LicenseCreateCtrl', function ($scope, $location, License, selectBoxService, mapDataService) {
+    .controller('LicenseCreateCtrl', function ($scope, $location, License, selectBoxService,
+                                               mapDataService, errorHandlerService, messageService) {
         $scope.license = new License();
         $scope.wellTypes = selectBoxService.wellTypes;
         $scope.statuses = selectBoxService.statuses;
@@ -64,29 +67,40 @@ angular.module('licenseManager.license.controllers', [])
 
 
         $scope.addLicense = function () {
+            if (!$scope.licenseForm.$valid) {
+                messageService.error('There are errors in the form.');
+                return;
+            }
             $scope.license.$save(function () {
+                messageService.message('License created.');
                 $location.path('/');
-            });
+            }, errorHandlerService.handleServerResponse);
         }
     })
 
-    .controller('LicenseEditCtrl', function ($scope, $location, $routeParams, mapDataService, messageService, License, selectBoxService) {
-        $scope.license = License.get({id: $routeParams.id}, function(){
+    .controller('LicenseEditCtrl', function ($scope, $location, $routeParams, mapDataService,
+                                             messageService, License, selectBoxService, errorHandlerService) {
+        $scope.license = License.get({id: $routeParams.id}, function () {
             mapDataService.fromLicense($scope, true);
         });
         $scope.wellTypes = selectBoxService.wellTypes;
         $scope.statuses = selectBoxService.statuses;
 
         $scope.updateLicense = function () {
-            var id = $scope.license['_id'];
-            delete $scope.license['_id'];
-            delete $scope.license['dateModified'];
-            delete $scope.license['dateIssued'];
+            if (!$scope.licenseForm.$valid) {
+                messageService.error('There are errors in the form.');
+                return;
+            }
+            var tempLicense = angular.copy($scope.license);
 
-            License.update({id: id}, $scope.license, function () {
+            var id = tempLicense['_id'];
+            delete tempLicense['_id'];
+            delete tempLicense['dateModified'];
+            delete tempLicense['dateIssued'];
+
+            License.update({id: id}, tempLicense, function () {
                 $location.path('/');
-                messageService.message('OK!');
-
-            });
+                messageService.message('License updated.');
+            }, errorHandlerService.handleServerResponse);
         };
     });

@@ -8,6 +8,12 @@ angular.module('licenseManager.license.services', ['ngResource'])
                 },
                 delete: {
                     method: 'DELETE'
+                },
+                query:{
+                    method: 'GET',
+                    isArray: true,
+                    cache: false
                 }
+
             });
     });

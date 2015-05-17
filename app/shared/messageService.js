@@ -4,6 +4,9 @@ angular.module('licenseManager.shared')
             return $window.confirm(message);
         };
         this.message = function (message) {
-            return $window.alert(message);
+            Materialize.toast(message, 4000);
+        };
+        this.error = function (message) {
+            Materialize.toast(message, 6000, 'red');
         };
     });

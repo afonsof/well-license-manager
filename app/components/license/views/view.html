@@ -2,51 +2,67 @@
     <nav class="blue-grey darken-3" role="navigation">
         <div class="nav-wrapper">
             <ul class="left">
-                <li><a href="#/"><i class="mdi-navigation-arrow-back"></i></a></li>
+                <li>
+                    <a title="Back" href="#/">
+                        <i class="mdi-navigation-arrow-back"></i>
+                    </a>
+                </li>
                 <li class="nav-title">{{license.company}}</li>
             </ul>
 
             <ul class="right">
-                <li><a href="" ng-click="deleteLicense()"><i class="mdi-action-delete"></i></a></li>
-                <li><a ng-href="#/edit/{{license._id}}"><i class="mdi-editor-mode-edit"></i></a></li>
+                <li>
+                    <button title="Delete" ng-click="deleteLicense()">
+                        <i class="mdi-action-delete"></i>
+                    </button>
+                </li>
+                <li>
+                    <a title="Edit" ng-href="#/edit/{{license._id}}">
+                        <i class="mdi-editor-mode-edit"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
+    <div class="container-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col l4 s12 icon">
+                    <i ng-class="'lmi lmi-'+license.status"></i>
 
-    <div class="row">
-        <div class="col l2 m3 s12 icon">
-            <i ng-class="'lmi lmi-'+license.status"></i>
+                    <div class="status">{{license.status}}</div>
+                    <div><span class="label">{{license.wellType}}</span></div>
+                </div>
 
-            <div class="status">{{license.status}}</div>
+                <div class="col l8 s12">
 
-            <div>Date Issued</div>
-            <div>{{license.dateIssued | date : format : short}}</div>
-            <div>Date Modified</div>
-            <div>{{license.dateModified | date : format : short}}</div>
+                    <label>Company</label>
 
-        </div>
+                    <div class="value">{{license.company}}</div>
+                    <label>Applicant</label>
 
-        <div class="col l5 m9 s12">
-            <table>
-                <tr>
-                    <th>Applicant</th>
-                    <td>{{license.applicant}}</td>
-                </tr>
-                <tr>
-                    <th>Well Type</th>
-                    <td>{{license.wellType}}</td>
-                </tr>
-                <tr>
-                    <th>Company</th>
-                    <td>{{license.company}}</td>
-                </tr>
-            </table>
-        </div>
-        <div class="col l5 m12 s12">
-            <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
-                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-                </ui-gmap-marker>
-            </ui-gmap-google-map>
+                    <div class="value">{{license.applicant}}</div>
+                    <label>Date Issued</label>
+
+                    <div class="value">{{license.dateIssued | date : format : short}}</div>
+                    <label>Date Modified</label>
+
+                    <div class="value">{{license.dateModified | date : format : short}}</div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h5>Location</h5>
+                </div>
+                <div class="col l12 s12">
+                    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="map.options">
+                        <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events"
+                                        idkey="marker.id">
+                        </ui-gmap-marker>
+                    </ui-gmap-google-map>
+                </div>
+            </div>
         </div>
     </div>
 </div>

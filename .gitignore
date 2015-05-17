@@ -3,5 +3,5 @@ node_modules/
 app/assets/components/
 .DS_Store
 .tmp/
-dist/
 app/assets/css/app.css
+*.log

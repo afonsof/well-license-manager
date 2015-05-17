@@ -1,6 +1,6 @@
+'use strict';
 angular.module('licenseManager.license.services', ['ngResource'])
-
-    .factory('License', function ($resource) {
+    .factory('License', ['$resource', function ($resource) {
         return $resource('http://petrofeed-coding-challenge.herokuapp.com/licenses/:id', null,
             {
                 update: {
@@ -9,11 +9,11 @@ angular.module('licenseManager.license.services', ['ngResource'])
                 delete: {
                     method: 'DELETE'
                 },
-                query:{
+                query: {
                     method: 'GET',
                     isArray: true,
                     cache: false
                 }
 
             });
-    });
+    }]);

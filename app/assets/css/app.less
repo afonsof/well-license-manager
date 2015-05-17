@@ -300,6 +300,10 @@ nav {
 #loading-bar .bar {
   top: @nav-height-lg;
   background-color: @green;
+
+  @media(max-width: @sm-devices-max-width){
+    top: @nav-height-sm;
+  }
 }
 
 #loading-bar .peg {

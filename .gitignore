@@ -2,3 +2,5 @@
 node_modules/
 app/assets/components/
 .DS_Store
+.tmp/
+dist/

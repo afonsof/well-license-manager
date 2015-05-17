@@ -1,5 +1,6 @@
+'use strict';
 angular.module('licenseManager.shared')
-    .service('mapDataService', function ($filter) {
+    .service('mapDataService', function () {
         var mapOptions = {
             scrollwheel: false,
             streetViewControl: false,
@@ -82,5 +83,5 @@ angular.module('licenseManager.shared')
             }
 
             $scope.markers = markers;
-        }
+        };
     });

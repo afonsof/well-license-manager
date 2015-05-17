@@ -1,5 +1,6 @@
+'use strict';
 angular.module('licenseManager.shared')
-    .service('messageService', function ($window) {
+    .service('messageService', ['$window', function ($window) {
         this.confirm = function (message) {
             return $window.confirm(message);
         };
@@ -9,4 +10,4 @@ angular.module('licenseManager.shared')
         this.error = function (message) {
             Materialize.toast(message, 6000, 'red');
         };
-    });
+    }]);

@@ -18,7 +18,7 @@ describe('Controllers', function () {
             $scopeMock = {};
             LicenseMock = {
                 query: function () {
-                    return queryPromise
+                    return queryPromise;
                 }
             };
             locationMock = {};

@@ -3,14 +3,14 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        sass: {
+
+        less: {
             dist: {
                 options: {
-                    style: 'expanded',
-                    sourcemap: 'none'
+                    paths: ["assets/css"]
                 },
                 files: {
-                    'app/assets/css/app.css': 'app/assets/css/app.scss'
+                    "app/assets/css/app.css": "app/assets/css/app.less"
                 }
             }
         }
@@ -23,5 +23,5 @@ module.exports = function (grunt) {
     require('time-grunt')(grunt);
 
     // Default task(s).
-    grunt.registerTask('default', ['sass']);
+    grunt.registerTask('default', ['less']);
 };

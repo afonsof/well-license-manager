@@ -12,6 +12,7 @@
     "angular-materialize": "*",
     "materialize": "~0.96.1",
     "angular-google-maps": "~2.1.1",
-    "html5-boilerplate": "~5.2.0"
+    "html5-boilerplate": "~5.2.0",
+    "angular-loading-bar": "~0.7.1"
   }
 }

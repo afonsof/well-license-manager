@@ -42,11 +42,9 @@ module.exports = function (grunt) {
             }
         },
 
-        // The actual grunt server settings
         connect: {
             options: {
                 port: 9000,
-                // Change this to '0.0.0.0' to access the server from outside.
                 hostname: 'localhost',
                 livereload: 35729
             },
@@ -115,17 +113,6 @@ module.exports = function (grunt) {
                         src: '{,*/}*.css',
                         dest: '<%= appConfig.tmp %>/concat/assets/css/'
                     }
-                ]
-            }
-        },
-
-        filerev: {
-            dist: {
-                src: [
-                    '<%= appConfig.dist %>/{,*/}*.js',
-                    '<%= appConfig.dist %>/assets/css/{,*/}*.css',
-                    '<%= appConfig.dist %>/assets/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-                    '<%= appConfig.dist %>/fonts/*'
                 ]
             }
         },
@@ -222,8 +209,6 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
-        // Copies remaining files to places other tasks can use
         copy: {
             dist: {
                 files: [
@@ -235,7 +220,7 @@ module.exports = function (grunt) {
                         src: [
                             '*.{html,ico,png,txt}',
                             'components/**/*.html',
-                            'shared/**/*.html',
+                            'shared/**/*.html'
                         ]
                     },
                     {
@@ -244,18 +229,11 @@ module.exports = function (grunt) {
                         cwd: '<%= appConfig.app %>/assets/components/materialize',
                         src: 'font/**/*.woff*',
                         dest: '<%= appConfig.dist %>/assets'
-                    }/*,
-                     {
-                     expand: true,
-                     cwd: 'src/3rd/material-design-iconic-font',
-                     src: 'fonts/*.woff',
-                     dest: '<%= appConfig.dist %>'
-                     }*/
+                    }
                 ]
             }
         },
 
-        // Run some tasks in parallel to speed up the build process
         concurrent: {
             shrinkImages: [
                 'imagemin',
@@ -278,16 +256,15 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('build', [
-        'clean:dist', //erase all dist folder files,
+        'clean:dist',
         'less',
-        'useminPrepare', //gera as instruções de minificação
-        'concurrent:shrinkImages', // minimiza imagens
-        'concat', // junta os arquivos em um só
-        'autoprefixer', //pensar em rodar depois do concat
+        'useminPrepare',
+        'concurrent:shrinkImages',
+        'concat',
+        'autoprefixer',
         'copy:dist',
         'cssmin',
         'uglify',
-        //'filerev',
         'usemin',
         'htmlmin'
     ]);

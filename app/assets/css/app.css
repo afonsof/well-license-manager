@@ -23,7 +23,12 @@ input.search-input {
 .nav-title img {
     width: 42px;
     margin-right: 20px;
-    margin-top: -4px;
+    margin-top: 10px;
+    float: left;
+}
+
+.nav-title div{
+    float: left;
 }
 
 .nav-title:hover {

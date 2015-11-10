@@ -1,4 +1,5 @@
 # Well License Manager
+Prototype using AngularJS and Google Maps
 
 ### Getting started
 ```
